@@ -19,6 +19,6 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const userModel = mongoose.model("livres" , userSchema)
+const userModel = mongoose.model("books" , userSchema)
 
 module.exports = userModel

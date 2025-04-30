@@ -2,7 +2,7 @@
 const userRouter = require("express").Router();
 const userModel = require("../models/userModel")
 
-userRouter.post("/livres", async(req, res) => {
+userRouter.post("/books", async(req, res) => {
     try {
         const livre = new userModel({
             titre: req.body.titre,
@@ -20,17 +20,17 @@ userRouter.post("/livres", async(req, res) => {
 
 })
 
-userRouter.get("/livres" , async(req,res)=>{
+userRouter.get("/books" , async(req,res)=>{
     try {
-        const livres = await userModel.find()
-        res.json(livres)
+        const books = await userModel.find()
+        res.json(books)
         await userModel.save()
     } catch (error) {
         console.log(error);
         res.json(error)
     }
 
-    userRouter.get("/livres/:titre" , async(req,res)=>{
+    userRouter.get("/books/:titre" , async(req,res)=>{
         try {
             const livre = await userModel.findBytitre(req.params.titre)
             res.json(livre)
@@ -39,7 +39,7 @@ userRouter.get("/livres" , async(req,res)=>{
             res.json(error)
         }
     })
-    userRouter.get("/livres/:id" , async(req,res)=>{
+    userRouter.get("/books/:id" , async(req,res)=>{
         try {
             const livre = await userModel.findOneById(req.params.id)
             res.json(livre)
@@ -48,9 +48,9 @@ userRouter.get("/livres" , async(req,res)=>{
             res.json(error)
         }
     })
-    userRouter.get("/livres/:id" , async(req,res)=>{
+    userRouter.update("/books/:id" , async(req,res)=>{
         try {
-            const livre = await userModel.updateOne(req.params.id)
+            const livre = await userModel.findByIdAndUpdate(req.params.id , req.body , {new : true})
             res.json(livre)
         } catch (error) {
             console.log(error);
@@ -58,7 +58,7 @@ userRouter.get("/livres" , async(req,res)=>{
         }
     })
 
-    userRouter.get("/livres/:id" , async(req,res)=>{
+    userRouter.delete("/books/:id" , async(req,res)=>{
         try {
             const livre = await userModel.deleteOne(req.params.id)
             res.json(livre)
